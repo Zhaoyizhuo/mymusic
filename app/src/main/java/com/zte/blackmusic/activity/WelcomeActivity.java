@@ -11,20 +11,11 @@ import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.zte.blackmusic.R;
 import com.zte.blackmusic.database.DBManager;
-import com.zte.blackmusic.util.HttpUtil;
-import com.zte.blackmusic.util.MyApplication;
-import com.zte.blackmusic.util.MyMusicUtil;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 
 public class WelcomeActivity extends BaseActivity {
@@ -38,43 +29,18 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //进入软件的加载页面
         super.onCreate(savedInstanceState);
+        //载入欢迎界面
         setContentView(R.layout.activity_welcome);
+        //欢迎页banner图
         bingIv = (ImageView)findViewById(R.id.welcome_bing_iv);
-        loadBingPic();
         dbManager = DBManager.getInstance(getApplicationContext());
         sharepreferences=this.getSharedPreferences("check", MODE_PRIVATE);
         editor=sharepreferences.edit();
         initPermission();
 
     }
-
-
-    private void loadBingPic(){
-        HttpUtil.sendOkHttpRequest(HttpUtil.requestBingPic, new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    final String bingPic = response.body().string();
-                    MyMusicUtil.setBingShared(bingPic);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Glide.with(MyApplication.getContext()).load(bingPic).into(bingIv);
-                        }
-                    });
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
     private void checkSkip() {
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -85,16 +51,12 @@ public class WelcomeActivity extends BaseActivity {
         };
         timer.schedule(task, 1000);
     }
-
     private void startMusicActivity() {
         Intent intent = new Intent();
         intent.setClass(this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
-
-
-
     private void initPermission() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             checkSkip();
