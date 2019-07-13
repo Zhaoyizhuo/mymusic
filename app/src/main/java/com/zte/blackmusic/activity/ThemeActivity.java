@@ -49,7 +49,6 @@ public class ThemeActivity extends BaseActivity {
         }
         init();
     }
-
     private void init(){
         for (int i = 0 ;i < themeType.length;i++){
             ThemeInfo info = new ThemeInfo();
@@ -78,9 +77,7 @@ public class ThemeActivity extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(ThemeActivity.this,HomeActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-//                overridePendingTransition(R.anim.in_from_left_anim,R.anim.out_to_right_anim);
                 break;
         }
         return true;

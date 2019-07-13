@@ -88,7 +88,6 @@ public class LastMyloveActivity extends PlayBarBaseActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         //设置Item增加、移除动画
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(
                 LastMyloveActivity.this, DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setAdapter(recyclerViewAdapter);

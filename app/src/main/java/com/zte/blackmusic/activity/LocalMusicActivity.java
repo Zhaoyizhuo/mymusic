@@ -111,7 +111,7 @@ public class LocalMusicActivity extends PlayBarBaseActivity {
         }
     }
 
-
+    //创建扫描按钮
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
