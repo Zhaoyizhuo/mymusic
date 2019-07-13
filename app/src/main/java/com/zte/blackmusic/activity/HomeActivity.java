@@ -64,7 +64,9 @@ public class HomeActivity extends PlayBarBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         dbManager = DBManager.getInstance(HomeActivity.this);
+        //上方栏toolbar
         toolbar = (Toolbar)findViewById(R.id.home_activity_toolbar);
+        //设置上方栏
         setSupportActionBar(toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navView = (NavigationView) findViewById(R.id.nav_view);
@@ -76,7 +78,7 @@ public class HomeActivity extends PlayBarBaseActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.drawer_menu);
         }
         refreshNightModeTitle();
-        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 mDrawerLayout.closeDrawers();
