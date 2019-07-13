@@ -71,12 +71,6 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.ViewHolder
             }
         });
 
-//        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onItemClickListener.onDeleteMenuClick(holder.swipeContent, position);
-//            }
-//        });
     }
 
     @Override

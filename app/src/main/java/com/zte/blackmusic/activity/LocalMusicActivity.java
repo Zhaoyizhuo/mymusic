@@ -37,13 +37,13 @@ public class LocalMusicActivity extends PlayBarBaseActivity {
     private SingleFragment singleFragment;
     private SingerFragment singerFragment;
     private AlbumFragment albumFragment;
-    private FolderFragment folderFragment;
     private TextView nothingTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_music);
+        //上方栏
         toolbar = (Toolbar)findViewById(R.id.local_music_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -53,7 +53,6 @@ public class LocalMusicActivity extends PlayBarBaseActivity {
         }
         init();
     }
-
 
     @Override
     protected void onDestroy() {
@@ -69,6 +68,7 @@ public class LocalMusicActivity extends PlayBarBaseActivity {
 
 
     private void init(){
+        //加载滑动布局
         addTapData();
         viewPager = (MyViewPager)findViewById(R.id.local_viewPager);
         tabLayout = (TabLayout)findViewById(R.id.local_tab);
@@ -82,6 +82,7 @@ public class LocalMusicActivity extends PlayBarBaseActivity {
         nothingTv = (TextView)findViewById(R.id.local_nothing_tv);
         nothingTv.setOnClickListener(new View.OnClickListener() {
             @Override
+            //点击进入扫描界面
             public void onClick(View v) {
                 Intent intent = new Intent(LocalMusicActivity.this,ScanActivity.class);
                 startActivity(intent);
