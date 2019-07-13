@@ -82,6 +82,7 @@ public class HomeActivity extends PlayBarBaseActivity {
         }
         //刷新日间夜间模式
         refreshNightModeTitle();
+
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
