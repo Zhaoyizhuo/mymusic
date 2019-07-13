@@ -52,7 +52,6 @@ public class PlaylistActivity extends PlayBarBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlist);
-        loadBingPic();
         playListInfo = getIntent().getParcelableExtra("playlistInfo");
         toolbar = (Toolbar) findViewById(R.id.activity_playlist_toolbar);
         setSupportActionBar(toolbar);
@@ -218,17 +217,4 @@ public class PlaylistActivity extends PlayBarBaseActivity {
         }
     }
 
-    private void loadBingPic(){
-        try {
-            bgIv = (ImageView) findViewById(R.id.playlist_head_bg_iv);
-            String bingPic = MyMusicUtil.getBingShared();
-            if (bingPic != null) {
-                Glide.with(this).load(bingPic).into(bgIv);
-            } else {
-                bgIv.setImageResource(R.drawable.bg_playlist);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

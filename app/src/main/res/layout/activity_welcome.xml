@@ -55,6 +55,7 @@
 
     <ImageView
         android:id="@+id/welcome_bing_iv"
+        android:src="@drawable/th"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/welcome_content_ll"

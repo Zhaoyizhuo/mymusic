@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ThemeActivity extends BaseActivity {
     public static int THEME_SIZE = 11;
-    private String[] themeType = {"哔哩粉", "知乎蓝", "酷安绿","网易红","藤萝紫","碧海蓝","樱草绿","咖啡棕","柠檬橙","星空灰","夜间模式"};
+    private String[] themeType = {"哔哩粉", "知乎蓝", "早苗绿","网易红","藤萝紫","碧海蓝","樱草绿","咖啡棕","柠檬橙","星空灰","夜间模式"};
     private int[] colors = {R.color.biliPink, R.color.zhihuBlue, R.color.kuanGreen, R.color.cloudRed,
             R.color.tengluoPurple, R.color.seaBlue, R.color.grassGreen, R.color.coffeeBrown,
             R.color.lemonOrange,R.color.startSkyGray,R.color.nightActionbar};

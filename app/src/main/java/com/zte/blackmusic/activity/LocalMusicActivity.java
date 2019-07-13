@@ -96,7 +96,6 @@ public class LocalMusicActivity extends PlayBarBaseActivity {
         titleList.add("单曲");
         titleList.add("歌手");
         titleList.add("专辑");
-        titleList.add("文件夹");
 
         if (singleFragment == null) {
             singleFragment = new SingleFragment();
@@ -109,10 +108,6 @@ public class LocalMusicActivity extends PlayBarBaseActivity {
         if (albumFragment == null) {
             albumFragment = new AlbumFragment();
             fragments.add(albumFragment);
-        }
-        if (folderFragment == null) {
-            folderFragment = new FolderFragment();
-            fragments.add(folderFragment);
         }
     }
 

@@ -29,16 +29,11 @@ import com.zte.blackmusic.database.DBManager;
 import com.zte.blackmusic.entity.PlayListInfo;
 import com.zte.blackmusic.service.MusicPlayerService;
 import com.zte.blackmusic.util.Constant;
-import com.zte.blackmusic.util.HttpUtil;
 import com.zte.blackmusic.util.MyApplication;
 import com.zte.blackmusic.util.MyMusicUtil;
 
 import java.io.IOException;
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 public class HomeActivity extends PlayBarBaseActivity {
 
@@ -77,7 +72,6 @@ public class HomeActivity extends PlayBarBaseActivity {
         navView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navView.getHeaderView(0);
         navHeadIv = (ImageView)headerView.findViewById(R.id.nav_head_bg_iv);
-        loadBingPic();
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -299,31 +293,4 @@ public class HomeActivity extends PlayBarBaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadBingPic(){
-        HttpUtil.sendOkHttpRequest(HttpUtil.requestBingPic, new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    final String bingPic = response.body().string();
-                    MyMusicUtil.setBingShared(bingPic);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Glide.with(MyApplication.getContext()).load(bingPic).into(navHeadIv);
-                        }
-                    });
-                }catch (Exception e){
-                    e.printStackTrace();
-                    navHeadIv.setImageResource(R.drawable.bg_playlist);
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                navHeadIv.setImageResource(R.drawable.bg_playlist);
-            }
-        });
-        navHeadIv.setImageResource(R.drawable.bg_playlist);
-    }
 }

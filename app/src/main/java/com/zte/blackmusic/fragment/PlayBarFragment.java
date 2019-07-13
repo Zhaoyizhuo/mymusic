@@ -214,7 +214,7 @@ public class PlayBarFragment extends Fragment {
         int musicId = MyMusicUtil.getIntShared(Constant.KEY_ID);
         if (musicId == -1){
             musicNameTv.setText("我的音乐盒");
-            singerNameTv.setText("好音质");
+            singerNameTv.setText("MyMusic");
         }else{
             musicNameTv.setText(dbManager.getMusicInfo(musicId).get(1));
             singerNameTv.setText(dbManager.getMusicInfo(musicId).get(2));

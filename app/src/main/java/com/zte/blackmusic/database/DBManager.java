@@ -109,8 +109,6 @@ public class DBManager {
         }
         return musicInfo;
     }
-
-
     public List<MusicInfo> getAllMusicFromTable(int playList) {
         Log.d(TAG, "getAllMusicFromTable: ");
         List<Integer> idList = getMusicList(playList);
@@ -538,7 +536,7 @@ public class DBManager {
         } else {
             musicInfo.add("0");
             musicInfo.add("我的音乐盒");
-            musicInfo.add("好音质");
+            musicInfo.add("MyMusic");
             musicInfo.add("0");
             musicInfo.add("0");
             musicInfo.add("0");
