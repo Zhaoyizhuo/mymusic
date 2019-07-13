@@ -31,8 +31,10 @@ import java.util.Map;
 public class MyMusicUtil {
 
     private static final String TAG = MyMusicUtil.class.getName();
+
     //获取当前播放列表
     public static List<MusicInfo> getCurPlayList(Context context){
+        //连接数据库
         DBManager dbManager = DBManager.getInstance(context);
         int playList = MyMusicUtil.getIntShared(Constant.KEY_LIST);
         List<MusicInfo> musicInfoList = new ArrayList<>();
@@ -64,14 +66,6 @@ public class MyMusicUtil {
                     musicInfoList = dbManager.getAllMusicFromMusicTable();
                 }else {
                     musicInfoList = dbManager.getMusicListByAlbum(albumName);
-                }
-                break;
-            case Constant.LIST_FOLDER:
-                String folderName = MyMusicUtil.getStringShared(Constant.KEY_LIST_ID);
-                if (folderName == null){
-                    musicInfoList = dbManager.getAllMusicFromMusicTable();
-                }else {
-                    musicInfoList = dbManager.getMusicListByFolder(folderName);
                 }
                 break;
         }
@@ -340,7 +334,7 @@ public class MyMusicUtil {
             case 1:
                 return R.style.ZhiHuBlueTheme;
             case 2:
-                return R.style.KuAnGreenTheme;
+                return R.style.ZaoMiaoGreenTheme;
             case 3:
                 return R.style.CloudRedTheme;
             case 4:

@@ -216,8 +216,6 @@ public class ModelActivity extends PlayBarBaseActivity {
             musicInfoList.addAll(dbManager.getMusicListBySinger(title));
         } else if (type.equals(ALBUM_TYPE)) {
             musicInfoList.addAll(dbManager.getMusicListByAlbum(title));
-        } else if (type.equals(FOLDER_TYPE)) {
-            musicInfoList.addAll(dbManager.getMusicListByFolder(getIntent().getStringExtra(KEY_PATH)));
         }
         Collections.sort(musicInfoList);
         adapter.notifyDataSetChanged();

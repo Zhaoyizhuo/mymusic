@@ -60,7 +60,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private String createPlaylistTable = "create table if not exists " + PLAY_LIST_TABLE + " ("
 			+ ID_COLUMN +" integer PRIMARY KEY autoincrement,"
 			+ NAME_COLUMN + " text);";
-
 	//创建歌单歌曲表
 	private String createListinfoTable = "create table if not exists " + PLAY_LISY_MUSIC_TABLE +" ("
 			+ ID_COLUMN + " integer,"
@@ -70,10 +69,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 	public DatabaseHelper(Context context) {
-		// 数据库实际被创建是在getWritableDatabase()或getReadableDatabase()方法调用时
+		//数据库实际被创建是在getWritableDatabase()或getReadableDatabase()方法调用时
 		super(context, DATABASE_NAME, null, VERSION);
 	}
-
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		Log.d(TAG, "onCreate");
@@ -83,7 +81,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(createListinfoTable);		//创建歌单歌曲表
 
 	}
-
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		Log.e(TAG, "onUpgrade: oldVersion ="+oldVersion );

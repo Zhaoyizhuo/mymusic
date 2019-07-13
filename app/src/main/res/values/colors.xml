@@ -35,8 +35,8 @@
     <!--主题颜色-->
 
     <!--早苗绿-->
-    <color name="kuanGreen">#4BAF4F</color>
-    <color name="kuanGreen50">#B04BAF4F</color>
+    <color name="ZaoMiaoGreen">#4BAF4F</color>
+    <color name="ZaoMiaoGreen50">#B04BAF4F</color>
     <!--知乎蓝-->
     <color name="zhihuBlue">#1F96F2</color>
     <color name="zhihuBlue50">#B01F96F2</color>

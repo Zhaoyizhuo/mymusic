@@ -11,11 +11,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //在基类方法中初始化主题
         initTheme();
     }
-
+//根据MyMusic中getTheme重写的方法得到主题
     private void initTheme(){
         int themeId = MyMusicUtil.getTheme(BaseActivity.this);
+        //设置主题
         switch (themeId){
             default:
             case 0:
@@ -25,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 setTheme(R.style.ZhiHuBlueTheme);
                 break;
             case 2:
-                setTheme(R.style.KuAnGreenTheme);
+                setTheme(R.style.ZaoMiaoGreenTheme);
                 break;
             case 3:
                 setTheme(R.style.CloudRedTheme);

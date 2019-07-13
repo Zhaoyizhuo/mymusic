@@ -19,21 +19,21 @@ import static com.zte.blackmusic.database.DatabaseHelper.ID_COLUMN;
 import static com.zte.blackmusic.database.DatabaseHelper.MUSIC_ID_COLUMN;
 
 public class DBManager {
-
     private static final String TAG = DBManager.class.getName();
     private DatabaseHelper helper;
     private SQLiteDatabase db;
     private static DBManager instance = null;
 
-
     /* 因为getWritableDatabase内部调用了mContext.openOrCreateDatabase(mName, 0,mFactory);
-     * 需要一个context参数 ,所以要确保context已初始化,我们可以把实例化DBManager的步骤放在Activity的onCreate里
+     * 需要一个context参数 ,所以要确保context已初始化,把实例化DBManager的步骤放在Activity的onCreate里
      */
     public DBManager(Context context) {
         helper = new DatabaseHelper(context);
+        //以读写方式打开数据库
         db = helper.getWritableDatabase();
     }
 
+    //同步方法，得到DBManager类
     public static synchronized DBManager getInstance(Context context) {
         if (instance == null) {
             instance = new DBManager(context);
@@ -44,6 +44,7 @@ public class DBManager {
     // 获取音乐表歌曲数量
     public int getMusicCount(int table) {
         int musicCount = 0;
+        //cursor是每行的集合，根据table数值得到歌曲数量
         Cursor cursor = null;
         switch (table) {
             case Constant.LIST_ALLMUSIC:
@@ -68,6 +69,7 @@ public class DBManager {
         return musicCount;
     }
 
+    //得到表内音乐列表
     public List<MusicInfo> getAllMusicFromMusicTable() {
         Log.d(TAG, "getAllMusicFromMusicTable: ");
         List<MusicInfo> musicInfoList = new ArrayList<>();
@@ -81,13 +83,14 @@ public class DBManager {
             e.printStackTrace();
         } finally {
             db.endTransaction();
-            if (cursor!=null){
+            if (cursor != null) {
                 cursor.close();
             }
         }
         return musicInfoList;
     }
 
+    //通过od得到歌单中一首歌
     public MusicInfo getSingleMusicFromMusicTable(int id) {
         Log.i(TAG, "getSingleMusicFromMusicTable: ");
         List<MusicInfo> musicInfoList = null;
@@ -103,12 +106,14 @@ public class DBManager {
             e.printStackTrace();
         } finally {
             db.endTransaction();
-            if (cursor!=null){
+            if (cursor != null) {
                 cursor.close();
             }
         }
         return musicInfo;
     }
+
+    //得到歌单中所有歌
     public List<MusicInfo> getAllMusicFromTable(int playList) {
         Log.d(TAG, "getAllMusicFromTable: ");
         List<Integer> idList = getMusicList(playList);
@@ -119,6 +124,7 @@ public class DBManager {
         return musicList;
     }
 
+    //得到我的播放列表
     public List<PlayListInfo> getMyPlayList() {
         List<PlayListInfo> playListInfos = new ArrayList<>();
         Cursor cursor = db.query(DatabaseHelper.PLAY_LIST_TABLE, null, null, null, null, null, null);
@@ -128,134 +134,116 @@ public class DBManager {
             int id = Integer.valueOf(cursor.getString(cursor.getColumnIndex(ID_COLUMN)));
             playListInfo.setId(id);
             playListInfo.setName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.NAME_COLUMN)));
-            cursorCount = db.query(DatabaseHelper.PLAY_LISY_MUSIC_TABLE,null, ID_COLUMN + " = ?", new String[]{"" + id}, null,null,null);
+            cursorCount = db.query(DatabaseHelper.PLAY_LISY_MUSIC_TABLE, null, ID_COLUMN + " = ?", new String[]{"" + id}, null, null, null);
             playListInfo.setCount(cursorCount.getCount());
             playListInfos.add(playListInfo);
         }
-        if (cursor!=null){
+        if (cursor != null) {
             cursor.close();
         }
-        if (cursorCount!=null){
+        if (cursorCount != null) {
             cursorCount.close();
         }
         return playListInfos;
     }
 
-
+    //建立播放列表
     public void createPlaylist(String name) {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.NAME_COLUMN, name);
         db.insert(DatabaseHelper.PLAY_LIST_TABLE, null, values);
     }
 
-    public List<MusicInfo> getMusicListBySinger(String singer){
+    //根据歌手查表
+    public List<MusicInfo> getMusicListBySinger(String singer) {
         List<MusicInfo> musicInfoList = new ArrayList<>();
         Cursor cursor = null;
         db.beginTransaction();
-        try{
-            String sql = "select * from "+DatabaseHelper.MUSIC_TABLE+" where "+ DatabaseHelper.SINGER_COLUMN+" = ? ";
-            cursor = db.rawQuery(sql,new String[]{singer});
+        try {
+            String sql = "select * from " + DatabaseHelper.MUSIC_TABLE + " where " + DatabaseHelper.SINGER_COLUMN + " = ? ";
+            cursor = db.rawQuery(sql, new String[]{singer});
             musicInfoList = cursorToMusicList(cursor);
             db.setTransactionSuccessful();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             db.endTransaction();
-            if (cursor !=null)
+            if (cursor != null)
                 cursor.close();
         }
         return musicInfoList;
     }
 
-    public List<MusicInfo> getMusicListByAlbum(String album){
+    //根据专辑查表
+    public List<MusicInfo> getMusicListByAlbum(String album) {
         List<MusicInfo> musicInfoList = new ArrayList<>();
         Cursor cursor = null;
         db.beginTransaction();
-        try{
-            String sql = "select * from "+DatabaseHelper.MUSIC_TABLE+" where "+ DatabaseHelper.ALBUM_COLUMN+" = ? ";
-            cursor = db.rawQuery(sql,new String[]{album});
+        try {
+            String sql = "select * from " + DatabaseHelper.MUSIC_TABLE + " where " + DatabaseHelper.ALBUM_COLUMN + " = ? ";
+            cursor = db.rawQuery(sql, new String[]{album});
             musicInfoList = cursorToMusicList(cursor);
             db.setTransactionSuccessful();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             db.endTransaction();
-            if (cursor !=null)
+            if (cursor != null)
                 cursor.close();
         }
         return musicInfoList;
     }
 
-    public List<MusicInfo> getMusicListByFolder(String folder){
-        List<MusicInfo> musicInfoList = new ArrayList<>();
-        Cursor cursor = null;
-        db.beginTransaction();
-        try{
-            String sql = "select * from "+DatabaseHelper.MUSIC_TABLE+" where "+ DatabaseHelper.PARENT_PATH_COLUMN+" = ? ";
-            cursor = db.rawQuery(sql,new String[]{folder});
-            musicInfoList = cursorToMusicList(cursor);
-            db.setTransactionSuccessful();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            db.endTransaction();
-            if (cursor !=null)
-                cursor.close();
-        }
-        return musicInfoList;
-    }
-
-    public ArrayList<Integer> getMusicIdListByPlaylist(int playlistId){
+    //根据音乐歌单得到音乐id数组
+    public ArrayList<Integer> getMusicIdListByPlaylist(int playlistId) {
         Cursor cursor = null;
         db.beginTransaction();
         ArrayList<Integer> list = new ArrayList<Integer>();
-        try{
-            String sql = "select * from "+DatabaseHelper.PLAY_LISY_MUSIC_TABLE+" where "+ ID_COLUMN+" = ? ";
-            cursor = db.rawQuery(sql,new String[]{""+playlistId});
+        try {
+            String sql = "select * from " + DatabaseHelper.PLAY_LISY_MUSIC_TABLE + " where " + ID_COLUMN + " = ? ";
+            cursor = db.rawQuery(sql, new String[]{"" + playlistId});
             while (cursor.moveToNext()) {
                 int musicId = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.MUSIC_ID_COLUMN));
                 list.add(musicId);
             }
             db.setTransactionSuccessful();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             db.endTransaction();
-            if (cursor !=null)
+            if (cursor != null)
                 cursor.close();
         }
         return list;
     }
 
-    public List<MusicInfo> getMusicListByPlaylist(int playlistId){
+    //根据播放列表id得到音乐信息列表
+    public List<MusicInfo> getMusicListByPlaylist(int playlistId) {
         List<MusicInfo> musicInfoList = new ArrayList<>();
         Cursor cursor = null;
         int id;
         db.beginTransaction();
-        try{
-            String sql = "select * from "+DatabaseHelper.PLAY_LISY_MUSIC_TABLE+" where "+ ID_COLUMN+" = ? ORDER BY "+ DatabaseHelper.ID_COLUMN;
-            cursor = db.rawQuery(sql,new String[]{""+playlistId});
-            while (cursor.moveToNext()){
+        try {
+            String sql = "select * from " + DatabaseHelper.PLAY_LISY_MUSIC_TABLE + " where " + ID_COLUMN + " = ? ORDER BY " + DatabaseHelper.ID_COLUMN;
+            cursor = db.rawQuery(sql, new String[]{"" + playlistId});
+            while (cursor.moveToNext()) {
                 MusicInfo musicInfo = new MusicInfo();
-                id =  cursor.getInt(cursor.getColumnIndex(MUSIC_ID_COLUMN));
+                id = cursor.getInt(cursor.getColumnIndex(MUSIC_ID_COLUMN));
                 musicInfo = getSingleMusicFromMusicTable(id);
                 musicInfoList.add(musicInfo);
             }
             db.setTransactionSuccessful();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             db.endTransaction();
-            if (cursor !=null)
+            if (cursor != null)
                 cursor.close();
         }
         return musicInfoList;
     }
 
-
-
-
-
+    //将音乐播放表插入歌单表
     public void insertMusicListToMusicTable(List<MusicInfo> musicInfoList) {
         Log.d(TAG, "insertMusicListToMusicTable: ");
         for (MusicInfo musicInfo : musicInfoList) {
@@ -282,34 +270,34 @@ public class DBManager {
             db.insert(DatabaseHelper.MUSIC_TABLE, null, values);
         } catch (Exception e) {
             e.printStackTrace();
-            if (cursor!=null){
+            if (cursor != null) {
                 cursor.close();
             }
         }
     }
 
     //添加音乐到歌单
-    public void addToPlaylist(int playlistId,int musicId){
+    public void addToPlaylist(int playlistId, int musicId) {
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.ID_COLUMN,playlistId);
-        values.put(DatabaseHelper.MUSIC_ID_COLUMN,musicId);
-        db.insert(DatabaseHelper.PLAY_LISY_MUSIC_TABLE,null,values);
+        values.put(DatabaseHelper.ID_COLUMN, playlistId);
+        values.put(DatabaseHelper.MUSIC_ID_COLUMN, musicId);
+        db.insert(DatabaseHelper.PLAY_LISY_MUSIC_TABLE, null, values);
     }
 
     //检索音乐是否已经存在歌单中
-    public boolean isExistPlaylist(int playlistId,int musicId){
+    public boolean isExistPlaylist(int playlistId, int musicId) {
         boolean result = false;
-        Cursor cursor = db.query(DatabaseHelper.PLAY_LISY_MUSIC_TABLE,null,ID_COLUMN + " = ? and "+ MUSIC_ID_COLUMN + " = ? ",
-                new String[]{""+playlistId,""+musicId},null,null,null);
-        if (cursor.moveToFirst()){
-            result= true;
+        Cursor cursor = db.query(DatabaseHelper.PLAY_LISY_MUSIC_TABLE, null, ID_COLUMN + " = ? and " + MUSIC_ID_COLUMN + " = ? ",
+                new String[]{"" + playlistId, "" + musicId}, null, null, null);
+        if (cursor.moveToFirst()) {
+            result = true;
         }
-        if (cursor!=null){
+        if (cursor != null) {
             cursor.close();
         }
-        return  result;
+        return result;
     }
-
+    //参数数组中所有
     public void updateAllMusic(List<MusicInfo> musicInfoList) {
         db.beginTransaction();
         try {
@@ -322,7 +310,6 @@ public class DBManager {
             db.endTransaction();
         }
     }
-
 
     //删除数据库中所有的表
     public void deleteAllTable() {
@@ -369,7 +356,7 @@ public class DBManager {
         try {
             ret = db.delete(DatabaseHelper.PLAY_LISY_MUSIC_TABLE, ID_COLUMN + " = ? and " + DatabaseHelper.MUSIC_ID_COLUMN
                     + " = ? ", new String[]{"" + playlistId, musicId + ""});
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ret;
@@ -426,8 +413,6 @@ public class DBManager {
         }
         return id;
     }
-
-
     // 获取下一首歌曲(id)
     public int getNextMusic(ArrayList<Integer> musicList, int id, int playMode) {
         if (id == -1) {
@@ -456,7 +441,6 @@ public class DBManager {
         }
         return id;
     }
-
     // 获取上一首歌曲(id)
     public int getPreMusic(ArrayList<Integer> musicList, int id, int playMode) {
         if (id == -1) {
@@ -485,7 +469,6 @@ public class DBManager {
         }
         return id;
     }
-
     // 获取歌单列表
     public ArrayList<Integer> getMusicList(int playList) {
         Cursor cursor = null;
@@ -496,7 +479,7 @@ public class DBManager {
                 cursor = db.query(DatabaseHelper.MUSIC_TABLE, null, null, null, null, null, null);
                 break;
             case Constant.LIST_LASTPLAY:
-                cursor = db.rawQuery("select * from "+DatabaseHelper.LAST_PLAY_TABLE+" ORDER BY "+ DatabaseHelper.ID_COLUMN,null);
+                cursor = db.rawQuery("select * from " + DatabaseHelper.LAST_PLAY_TABLE + " ORDER BY " + DatabaseHelper.ID_COLUMN, null);
                 break;
             case Constant.LIST_MYLOVE:
                 cursor = db.query(DatabaseHelper.MUSIC_TABLE, null, DatabaseHelper.LOVE_COLUMN + " = ?", new String[]{"" + 1}, null, null, null);
@@ -610,7 +593,7 @@ public class DBManager {
             }
         }
     }
-
+    //设置我的喜欢
     public void setMyLove(int id) {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.LOVE_COLUMN, 1);
@@ -671,6 +654,4 @@ public class DBManager {
         }
         return list;
     }
-
-
 }

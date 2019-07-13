@@ -31,12 +31,15 @@ public class WelcomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        //背景图片id
         bingIv = (ImageView)findViewById(R.id.welcome_bing_iv);
         dbManager = DBManager.getInstance(getApplicationContext());
         sharepreferences=this.getSharedPreferences("check", MODE_PRIVATE);
+        //获取权限
         editor=sharepreferences.edit();
         initPermission();
     }
+    //在1秒后跳转到startMusicActivity方法的页面
     private void checkSkip() {
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -47,7 +50,7 @@ public class WelcomeActivity extends BaseActivity {
         };
         timer.schedule(task, 1000);
     }
-
+    //跳转到homeActivity
     private void startMusicActivity() {
         Intent intent = new Intent();
         intent.setClass(this, HomeActivity.class);
@@ -70,7 +73,7 @@ public class WelcomeActivity extends BaseActivity {
             checkSkip();
         }
     }
-
+   //根据不同的版本进行不同的权限管理，高版本选择动态权限管理
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
