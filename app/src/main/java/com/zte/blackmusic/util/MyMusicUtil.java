@@ -15,7 +15,6 @@ import com.zte.blackmusic.R;
 import com.zte.blackmusic.activity.ThemeActivity;
 import com.zte.blackmusic.database.DBManager;
 import com.zte.blackmusic.entity.AlbumInfo;
-import com.zte.blackmusic.entity.FolderInfo;
 import com.zte.blackmusic.entity.MusicInfo;
 import com.zte.blackmusic.entity.SingerInfo;
 import com.zte.blackmusic.service.MusicPlayerService;
@@ -252,35 +251,6 @@ public class MyMusicUtil {
         }
 
         return albumInfoList;
-    }
-
-    //按文件夹分组
-    public static ArrayList<FolderInfo> groupByFolder(ArrayList list) {
-        Map<String, List<MusicInfo>> musicMap = new HashMap<>();
-        ArrayList<FolderInfo> folderInfoList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            MusicInfo musicInfo = (MusicInfo) list.get(i);
-            if (musicMap.containsKey(musicInfo.getParentPath())) {
-                ArrayList folderList = (ArrayList) musicMap.get(musicInfo.getParentPath());
-                folderList.add(musicInfo);
-            } else {
-                ArrayList temp = new ArrayList();
-                temp.add(musicInfo);
-                musicMap.put(musicInfo.getParentPath(), temp);
-            }
-        }
-
-        for (Map.Entry<String,List<MusicInfo>> entry : musicMap.entrySet()) {
-            System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
-            FolderInfo folderInfo = new FolderInfo();
-            File file = new File(entry.getKey());
-            folderInfo.setName(file.getName());
-            folderInfo.setPath(entry.getKey());
-            folderInfo.setCount(entry.getValue().size());
-            folderInfoList.add(folderInfo);
-        }
-
-        return folderInfoList;
     }
 
     //设置主题

@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.zte.blackmusic.R;
 import com.zte.blackmusic.fragment.AlbumFragment;
-import com.zte.blackmusic.fragment.FolderFragment;
 import com.zte.blackmusic.fragment.SingerFragment;
 import com.zte.blackmusic.fragment.SingleFragment;
 import com.zte.blackmusic.util.Constant;
