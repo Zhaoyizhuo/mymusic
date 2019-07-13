@@ -43,6 +43,7 @@ public class PlayerManagerReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         int cmd = intent.getIntExtra(Constant.COMMAND,Constant.COMMAND_INIT);
         Log.d(TAG, "cmd = " + cmd);
+        //识别命令类型
         switch (cmd) {
             case Constant.COMMAND_INIT:	//已经在创建的时候初始化了，可以撤销了
                 Log.d(TAG, "COMMAND_INIT");
@@ -89,7 +90,7 @@ public class PlayerManagerReceiver extends BroadcastReceiver {
     private void initStopOperate(){
         MyMusicUtil.setShared(Constant.KEY_ID,dbManager.getFirstId(Constant.LIST_ALLMUSIC));
     }
-
+    //播放音乐
     private void playMusic(String musicPath) {
         NumberRandom();
         if (mediaPlayer!=null) {
@@ -125,8 +126,6 @@ public class PlayerManagerReceiver extends BroadcastReceiver {
         }
 
     }
-
-
     //取一个（0，100）之间的不一样的随机数
     private void NumberRandom() {
         int count;
@@ -135,29 +134,11 @@ public class PlayerManagerReceiver extends BroadcastReceiver {
         } while (count == threadNumber);
         threadNumber = count;
     }
-
+    //播放结束执行下一首
     private void onComplete() {
         MyMusicUtil.playNextMusic(context);
-//        int musicId = MyMusicUtil.getIntShared(Constant.KEY_ID);
-//        int playMode = MyMusicUtil.getIntShared(Constant.KEY_MODE);
-//        int list = MyMusicUtil.getIntShared(Constant.KEY_LIST);
-//
-//        ArrayList<Integer> musicList = dbManager.getMusicList(list);
-//        if (musicId == -1) {
-//            return;
-//        }
-//        if (musicList.isEmpty()) {
-//            return;
-//        }
-//
-//        musicId = dbManager.getNextMusic(musicList, musicId,playMode);
-//        String path = dbManager.getMusicPath(musicId);
-//        playMusic(path);
-//
-//        MyMusicUtil.setShared(Constant.KEY_ID,musicId);
-//        UpdateUI();
     }
-
+    //更新界面
     private void UpdateUI() {
         Intent playBarintent = new Intent(PlayBarFragment.ACTION_UPDATE_UI_PlayBar);    //接收广播为MusicUpdateMain
         playBarintent.putExtra(Constant.STATUS, status);
@@ -166,9 +147,6 @@ public class PlayerManagerReceiver extends BroadcastReceiver {
         Intent intent = new Intent(ACTION_UPDATE_UI_ADAPTER);    //接收广播为所有歌曲列表的adapter
         context.sendBroadcast(intent);
 
-//        Intent widgetIntent = new Intent(Constant.WIDGET_STATUS);//发送更新桌面widget的广播
-//        widgetIntent.putExtra("status", status);
-//        context.sendBroadcast(widgetIntent);
     }
 
 

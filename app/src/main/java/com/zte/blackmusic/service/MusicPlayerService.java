@@ -43,14 +43,14 @@ public class MusicPlayerService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-
+      //新建执行
     private void register() {
         mReceiver = new PlayerManagerReceiver(MusicPlayerService.this);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(PLAYER_MANAGER_ACTION);
         registerReceiver(mReceiver, intentFilter);
     }
-
+     //退出执行
     private void unRegister() {
         if (mReceiver != null) {
             unregisterReceiver(mReceiver);

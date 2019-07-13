@@ -84,15 +84,18 @@ public class HomeActivity extends PlayBarBaseActivity {
         refreshNightModeTitle();
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+            //选中导航中的按钮时执行下面操作
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 mDrawerLayout.closeDrawers();
                 switch (item.getItemId()){
+                    //主题商城
                     case R.id.nav_theme:
                         isStartTheme = true;
                         Intent intentTheme = new Intent(HomeActivity.this,ThemeActivity.class);
                         startActivity(intentTheme);
                         break;
+                        //日夜
                     case R.id.nav_night_mode:
                         int preTheme = 0;
                         if(MyMusicUtil.getNightMode(HomeActivity.this)){
@@ -108,15 +111,20 @@ public class HomeActivity extends PlayBarBaseActivity {
                         recreate();
                         refreshNightModeTitle();
                         break;
+                        //关于
                     case R.id.nav_about_me:
                         Intent aboutTheme = new Intent(HomeActivity.this,AboutActivity.class);
                         startActivity(aboutTheme);
                         break;
+                        //退出同时停止播放
                     case R.id.nav_logout:
                         finish();
                         Intent intentBroadcast = new Intent(MusicPlayerService.PLAYER_MANAGER_ACTION);
+                        //用来传值的函数
                         intentBroadcast.putExtra(Constant.COMMAND, Constant.COMMAND_RELEASE);
+                        //向service发送广播
                         sendBroadcast(intentBroadcast);
+                        //跳转
                         Intent stopIntent = new Intent(HomeActivity.this,MusicPlayerService.class);
                         stopService(stopIntent);
                         break;
@@ -125,11 +133,10 @@ public class HomeActivity extends PlayBarBaseActivity {
             }
         });
         init();
-
         Intent startIntent = new Intent(HomeActivity.this,MusicPlayerService.class);
         startService(startIntent);
-
     }
+
      //更新按钮模式（日间/夜间）
     private void refreshNightModeTitle(){
         if (MyMusicUtil.getNightMode(HomeActivity.this)){
@@ -138,7 +145,7 @@ public class HomeActivity extends PlayBarBaseActivity {
             navView.getMenu().findItem(R.id.nav_night_mode).setTitle("夜间模式");
         }
     }
-
+   //暂停保存状态（被其他覆盖时），记录下显示的每首歌曲数量
     @Override
     protected void onResume() {
         super.onResume();
@@ -154,6 +161,7 @@ public class HomeActivity extends PlayBarBaseActivity {
     }
 
     private void init(){
+        //匹配所有id
         localMusicLl = (LinearLayout) findViewById(R.id.home_local_music_ll);
         lastPlayLl = (LinearLayout) findViewById(R.id.home_recently_music_ll);
         myLoveLl = (LinearLayout) findViewById(R.id.home_my_love_music_ll);
@@ -165,7 +173,7 @@ public class HomeActivity extends PlayBarBaseActivity {
         myPLCountTv = (TextView) findViewById(R.id.home_my_list_count_tv);
         myPLArrowIv = (ImageView) findViewById(R.id.home_my_pl_arror_iv);
         myPLAddIv = (ImageView) findViewById(R.id.home_my_pl_add_iv);
-
+      //跳转到本地音乐
         localMusicLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,7 +181,7 @@ public class HomeActivity extends PlayBarBaseActivity {
                 startActivity(intent);
             }
         });
-
+      //跳转到最近音乐
         lastPlayLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,7 +190,7 @@ public class HomeActivity extends PlayBarBaseActivity {
                 startActivity(intent);
             }
         });
-
+     //跳转到我的喜爱
         myLoveLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,7 +199,7 @@ public class HomeActivity extends PlayBarBaseActivity {
                 startActivity(intent);
             }
         });
-
+        //得到歌单
         playListInfos = dbManager.getMyPlayList();
         adapter = new HomeListViewAdapter(playListInfos,this,dbManager);
         listView.setAdapter(adapter);
@@ -246,7 +254,7 @@ public class HomeActivity extends PlayBarBaseActivity {
             }
         });
     }
-
+       //更新播放列表歌曲数量
     public void updatePlaylistCount(){
         count = dbManager.getMusicCount(Constant.LIST_MYPLAY);
         myPLCountTv.setText("(" + count + ")");
@@ -258,7 +266,7 @@ public class HomeActivity extends PlayBarBaseActivity {
         Log.d(TAG, "onDestroy: ");
 
     }
-
+    //改变主题时更新主题
     @Override
     protected void onPause() {
         super.onPause();
@@ -294,5 +302,4 @@ public class HomeActivity extends PlayBarBaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
