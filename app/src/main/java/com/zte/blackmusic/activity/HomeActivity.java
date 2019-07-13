@@ -66,17 +66,21 @@ public class HomeActivity extends PlayBarBaseActivity {
         dbManager = DBManager.getInstance(HomeActivity.this);
         //上方栏toolbar
         toolbar = (Toolbar)findViewById(R.id.home_activity_toolbar);
-        //设置上方栏
         setSupportActionBar(toolbar);
+        //获得首页整体id
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //获取左边栏id
         navView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navView.getHeaderView(0);
         navHeadIv = (ImageView)headerView.findViewById(R.id.nav_head_bg_iv);
         ActionBar actionBar = getSupportActionBar();
+        //先得到actionbar
         if (actionBar != null) {
+            // 该类固定写法，规定了导航图标
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.drawer_menu);
         }
+        //刷新日间夜间模式
         refreshNightModeTitle();
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
             @Override
@@ -125,7 +129,7 @@ public class HomeActivity extends PlayBarBaseActivity {
         startService(startIntent);
 
     }
-
+     //更新按钮模式（日间/夜间）
     private void refreshNightModeTitle(){
         if (MyMusicUtil.getNightMode(HomeActivity.this)){
             navView.getMenu().findItem(R.id.nav_night_mode).setTitle("日间模式");

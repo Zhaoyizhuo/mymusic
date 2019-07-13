@@ -55,17 +55,6 @@ public class AboutActivity extends BaseActivity{
         startActivity(intent);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                break;
-        }
-        return true;
-    }
-
     /**
      * 获取版本号
      * @return 当前应用的版本号
