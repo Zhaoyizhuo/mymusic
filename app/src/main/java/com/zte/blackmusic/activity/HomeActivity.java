@@ -36,7 +36,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class HomeActivity extends PlayBarBaseActivity {
-
     private static final String TAG = HomeActivity.class.getName();
     private DBManager dbManager;
     private DrawerLayout mDrawerLayout;
@@ -60,7 +59,6 @@ public class HomeActivity extends PlayBarBaseActivity {
     private boolean isOpenMyPL = false; //标识我的歌单列表打开状态
     private long exitTime = 0;
     private boolean isStartTheme = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,11 +98,8 @@ public class HomeActivity extends PlayBarBaseActivity {
                             MyMusicUtil.setNightMode(HomeActivity.this,true);
                             MyMusicUtil.setTheme(HomeActivity.this,ThemeActivity.THEME_SIZE-1);
                         }
-//                        Intent intentNight = new Intent(HomeActivity.this,HomeActivity.class);
-//                        startActivity(intentNight);
                         recreate();
                         refreshNightModeTitle();
-//                        overridePendingTransition(R.anim.start_anim,R.anim.out_anim);
                         break;
                     case R.id.nav_about_me:
                         Intent aboutTheme = new Intent(HomeActivity.this,AboutActivity.class);
