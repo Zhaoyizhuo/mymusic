@@ -31,8 +31,8 @@ public class LocalMusicActivity extends PlayBarBaseActivity {
     private TabLayout tabLayout;
     private MyViewPager viewPager;
     private MyAdapter fragmentAdapter;
-    private List<String> titleList = new ArrayList<>(4);
-    private List<Fragment> fragments = new ArrayList<>(4);
+    private List<String> titleList = new ArrayList<>(3);
+    private List<Fragment> fragments = new ArrayList<>(3);
     private SingleFragment singleFragment;
     private SingerFragment singerFragment;
     private AlbumFragment albumFragment;

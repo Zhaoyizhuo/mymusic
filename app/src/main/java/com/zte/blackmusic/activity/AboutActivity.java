@@ -34,12 +34,10 @@ public class AboutActivity extends BaseActivity{
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
+        //定义网站
         versionTv = (TextView) findViewById(R.id.about_version);
-     //   startLl = (LinearLayout) findViewById(R.id.about_start_ll);
         scoreLl = (LinearLayout) findViewById(R.id.about_score_ll);
         versionTv.setText(getVersion());
-
         scoreLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +66,6 @@ public class AboutActivity extends BaseActivity{
 
     /**
      * 获取版本号
-     * @return 当前应用的版本号
      */
     public String getVersion() {
         try {

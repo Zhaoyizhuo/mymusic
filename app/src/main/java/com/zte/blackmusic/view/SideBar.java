@@ -100,7 +100,6 @@ public class SideBar extends View{
 
     //为SideBar设置显示索引放大的预览View
     public void setTextView(TextView mTextDialog) {
-//        this.mTextDialog = mTextDialog;
     }
 
     protected void onDraw(Canvas canvas) {

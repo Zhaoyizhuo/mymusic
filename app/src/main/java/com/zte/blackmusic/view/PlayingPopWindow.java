@@ -30,9 +30,7 @@ public class PlayingPopWindow extends PopupWindow{
     private static final String TAG = PlayingPopWindow.class.getName();
     private View view;
     private Activity activity;
-//    private ImageView playModeIv;
     private TextView countTv;
-//    private TextView playModeTv;
     private RelativeLayout closeRv;
     private RecyclerView recyclerView;
     private Adapter adapter;

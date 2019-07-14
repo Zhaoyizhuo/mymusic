@@ -15,7 +15,6 @@ public class CustomAttrValueUtil {
      *         默认颜色值
      */
     public static int getAttrColorValue(int attr, int defaultColor, Context context) {
-
         int[] attrsArray = {attr};
         TypedArray typedArray = context.obtainStyledAttributes(attrsArray);
         int value = typedArray.getColor(0, defaultColor);

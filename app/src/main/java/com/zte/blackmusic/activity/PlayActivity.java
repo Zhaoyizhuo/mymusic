@@ -37,8 +37,6 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = PlayActivity.class.getName();
 
-//    public static final String ACTION_UPDATE_UI_PLAY_ACTIVITY = "com.zte.blackmusic.activity.playactivity:action_update_ui_broad_cast";
-
     private DBManager dbManager;
 
     private ImageView backIv;

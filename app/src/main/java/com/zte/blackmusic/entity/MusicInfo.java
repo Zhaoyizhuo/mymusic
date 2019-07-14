@@ -3,19 +3,6 @@ package com.zte.blackmusic.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by zte on 2016/12/19.
- *
- *
- *
- MediaStore.Audio.Media._ID,                 //歌曲ID
- MediaStore.Audio.Media.TITLE,               //歌曲名称
- MediaStore.Audio.Media.ARTIST,              //歌曲歌手
- MediaStore.Audio.Media.ALBUM,               //歌曲的专辑名
- MediaStore.Audio.Media.DURATION,            //歌曲时长
- MediaStore.Audio.Media.DISPLAY_NAME,        //歌曲文件的名称
- MediaStore.Audio.Media.DATA};               //歌曲文件的全路径
- */
 
 public class MusicInfo implements Comparable, Parcelable {
 

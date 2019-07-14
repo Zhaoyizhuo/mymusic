@@ -44,7 +44,6 @@ public class UpdateUIThread extends Thread {
 //				Log.d(TAG, "current = "+curPosition);
 					Intent intent = new Intent(PlayBarFragment.ACTION_UPDATE_UI_PlayBar);
 					intent.putExtra(Constant.STATUS, Constant.STATUS_RUN);
-//				intent.putExtra("status2", playerManagerReceiver.status);
 					intent.putExtra(Constant.KEY_DURATION, duration);
 					intent.putExtra(Constant.KEY_CURRENT, curPosition);
 					context.sendBroadcast(intent);
