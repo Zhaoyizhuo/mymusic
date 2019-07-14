@@ -154,16 +154,10 @@ public class AddPlaylistWindow extends PopupWindow {
             }
             holder.swipView.setSwipeEnable(false);
 
-//        if (dataList.size() == 0){
-//            //展现默认的新建歌单列表
-//            holder.listName.setText("aaa");
-//            holder.listCount.setText("0首");
-//        }else {
-            //展现已有的歌单列表
             final PlayListInfo playListInfo = dataList.get(position);
             holder.listName.setText(playListInfo.getName());
             holder.listCount.setText(playListInfo.getCount() + "首");
-//        }
+
 
             holder.contentLl.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -175,34 +169,6 @@ public class AddPlaylistWindow extends PopupWindow {
                         Toast.makeText(activity,"添加到歌单成功",Toast.LENGTH_SHORT).show();
                     }
                     dismiss();
-//                if (dataList.size() == 0){
-//                    //添加歌单
-//                    final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                    View view = LayoutInflater.from(context).inflate(R.layout.dialog_create_playlist,null);
-//                    final EditText playlistEt = (EditText)view.findViewById(R.id.dialog_playlist_name_et);
-//                    builder.setView(view);
-//                    builder.setTitle("新建歌单");
-//                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            String name = playlistEt.getText().toString();
-//                            dbManager.createPlaylist(name);
-//                            dialog.dismiss();
-//                            updateDataList();
-//                        }
-//                    });
-//
-//                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    });
-//
-//                    builder.show();//配置好后再builder show
-//                }else {
-                    //进入歌单
-//                }
                 }
             });
 

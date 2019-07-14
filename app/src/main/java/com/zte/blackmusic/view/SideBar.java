@@ -123,16 +123,9 @@ public class SideBar extends View{
 
                 canvas.drawCircle((width-singleHeight)/2.0f,curY,radius,circlePaint);
 
-//                canvas.drawLine((width-singleHeight)/2.0f - radius,curY,(width-singleHeight)/2.0f + radius,curY,testPaint);
-//                canvas.drawLine((width-singleHeight)/2.0f ,curY- radius,(width-singleHeight)/2.0f ,curY+ radius,testPaint);
-//                canvas.drawRect((width-singleHeight)/2.0f - rect.width()/2.0f,curY - rect.height()/2.0f,
-//                        (width-singleHeight)/2.0f + rect.width()/2.0f,curY + rect.height()/2.0f,testPaint);
-
                 textPaint.setTextAlign(Paint.Align.CENTER);
                 canvas.drawText(sections[i],(width-singleHeight)/2.0f,curY + rect.height()/2.0f,textPaint);
-
             }
-
             indexPaint.getTextBounds(sections[i], 0, 1, bounds);
             float xPos = (width - singleHeight) + singleHeight / 2.0f - indexPaint.measureText(sections[i]) / 2.0f;
             float yPos = singleHeight * i + (singleHeight + bounds.height())/2.0f ;
@@ -150,7 +143,6 @@ public class SideBar extends View{
         int count = (int) (curY / (getHeight() / sections.length));
         switch (action) {
             case MotionEvent.ACTION_UP:
-//                setBackgroundColor(Color.parseColor("#00000000"));
                 selected = -1;
                 invalidate();
                 if (mTextDialog != null) {
@@ -161,7 +153,6 @@ public class SideBar extends View{
                 if (event.getX() < width - singleHeight)
                     return false;
             default:
-//                setBackgroundResource(R.drawable.sidebar_background);
                 if (oldChoose != count) {
                     if (count >= 0 && count < sections.length) {
                         if (onListener != null) {
@@ -172,9 +163,6 @@ public class SideBar extends View{
                             mTextDialog.setVisibility(View.VISIBLE);
                         }
                         selected = count;
-//                        invalidate();
-//                        curY = event.getY();
-//                        Log.e(TAG, "dispatchTouchEvent: curY = "+curY );
                     }
                 }
                 curY = (curY < radius) ? radius : curY;

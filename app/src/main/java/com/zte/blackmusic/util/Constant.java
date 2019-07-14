@@ -61,11 +61,6 @@ public class Constant {
 	public static final int SCAN_COMPLETE = 1;
 	public static final int SCAN_UPDATE = 2;
 	public static final int SCAN_NO_MUSIC = 3;
-//	public static final int LOAD_COMPLETE = 4;
-//	public static final int LOAD_PREPARE = 5;
-//	public static final int LOAD_ERROR = 6;
-//	public static final int DOWNLOAD_UPDATE = 14;
-
 
 	//SharedPreferences key 常量
 	public static final String KEY_ID = "id";
@@ -76,13 +71,7 @@ public class Constant {
 	public static final String KEY_CURRENT = "current";
 	public static final String KEY_DURATION = "duration";
 
-	//SharedPreferences value 常量 匹配 KEY_LIST
 	public static final int LIST_SINGLE = 101;	//单曲列表
-//	public static final int LIST_SINGLE = 101;	//歌手列表
-//	public static final int LIST_SINGLE = 101;	//专辑列表
-//	public static final int LIST_SINGLE = 101;	//最近播放列表
-//	public static final int LIST_SINGLE = 101;	//我喜爱列表
-
 
 	//歌曲列表常量
 	public static final int LIST_ALLMUSIC = -1;
