@@ -137,6 +137,7 @@ public class ScanActivity extends BaseActivity {
         });
         scanView.stop();
     }
+    //检索音乐
     public void startScanLocalMusic() {
         new Thread() {
 
@@ -164,7 +165,7 @@ public class ScanActivity extends BaseActivity {
                             String album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.ALBUM));
                             String path = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DATA));
                             String duration = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DURATION));
-
+                            //小于60秒的不检索
                             if (filterCb.isChecked() && duration != null && Long.valueOf(duration) < 1000 * 60){
                                 Log.e(TAG, "run: name = "+name+" duration < 1000 * 60" );
                                 continue;
@@ -195,10 +196,6 @@ public class ScanActivity extends BaseActivity {
                             msg = new Message();    //每次都必须new，必须发送新对象，不然会报错
                             msg.what = Constant.SCAN_UPDATE;
                             msg.arg1 = musicCount;
-//                                Bundle data = new Bundle();
-//                                data.putInt("progress", progress);
-//                                data.putString("scanPath", scanPath);
-//                                msg.setData(data);
                             handler.sendMessage(msg);  //更新UI界面
                             try {
                                 sleep(50);
@@ -252,7 +249,6 @@ public class ScanActivity extends BaseActivity {
         }
         return oldStr;
     }
-
     //初始化当前播放音乐，有可能当前正在播放音乐已经被过滤掉了
     private void initCurPlaying(){
         try {
@@ -286,7 +282,7 @@ public class ScanActivity extends BaseActivity {
         }
 
     }
-
+     //设置检索按钮颜色
     private void setScanBtnBg(){
         int defColor = CustomAttrValueUtil.getAttrColorValue(R.attr.colorAccent,R.color.colorAccent,this);
         int pressColor = CustomAttrValueUtil.getAttrColorValue(R.attr.press_color,R.color.colorAccent,this);

@@ -85,20 +85,11 @@ public class PlayingPopWindow extends PopupWindow{
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
 
-//        playModeIv = (ImageView)view.findViewById(R.id.playing_list_playmode_iv);
-//        playModeTv = (TextView) view.findViewById(R.id.playing_list_playmode_Tv);
         closeRv = (RelativeLayout) view.findViewById(R.id.playing_list_close_rv);
         countTv = (TextView)view.findViewById(R.id.playing_list_count_tv);
         countTv.setText("("+musicInfoList.size()+")");
 
-//        initPlayMode();
 
-//        playModeIv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                switchPlayMode();
-//            }
-//        });
 
         closeRv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,45 +99,6 @@ public class PlayingPopWindow extends PopupWindow{
         });
 
     }
-
-
-//    private void initPlayMode() {
-//        int playMode = MyMusicUtil.getIntShared(Constant.KEY_MODE);
-//        if (playMode == -1) {
-//            playMode = 0;
-//        }
-//        playModeIv.setImageLevel(playMode);
-//        switch (playMode){
-//            case Constant.PLAYMODE_SEQUENCE:
-//                playModeTv.setText(Constant.PLAYMODE_SEQUENCE_TEXT);
-//                break;
-//            case Constant.PLAYMODE_RANDOM:
-//                playModeTv.setText(Constant.PLAYMODE_RANDOM_TEXT);
-//                break;
-//            case Constant.PLAYMODE_SINGLE_REPEAT:
-//                playModeTv.setText(Constant.PLAYMODE_SINGLE_REPEAT_TEXT);
-//                break;
-//        }
-//    }
-
-//    private void switchPlayMode() {
-//        int playMode = MyMusicUtil.getIntShared(Constant.KEY_MODE);
-//        switch (playMode){
-//            case Constant.PLAYMODE_SEQUENCE:
-//                playModeTv.setText(Constant.PLAYMODE_RANDOM_TEXT);
-//                MyMusicUtil.setShared(Constant.KEY_MODE,Constant.PLAYMODE_RANDOM);
-//                break;
-//            case Constant.PLAYMODE_RANDOM:
-//                playModeTv.setText(Constant.PLAYMODE_SINGLE_REPEAT_TEXT);
-//                MyMusicUtil.setShared(Constant.KEY_MODE,Constant.PLAYMODE_SINGLE_REPEAT);
-//                break;
-//            case Constant.PLAYMODE_SINGLE_REPEAT:
-//                playModeTv.setText(Constant.PLAYMODE_SEQUENCE_TEXT);
-//                MyMusicUtil.setShared(Constant.KEY_MODE,Constant.PLAYMODE_SEQUENCE);
-//                break;
-//        }
-//        initPlayMode();
-//    }
 
 
     private class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {

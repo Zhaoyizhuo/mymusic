@@ -7,7 +7,6 @@
         android:id="@+id/local_music_playmode_rl"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/local_viewPager"
         android:gravity="center_vertical"
         android:clickable="true"
         android:background="?attr/appbg">
@@ -26,11 +25,6 @@
             android:gravity="center_vertical"
             android:textSize="15sp"
             android:text="顺序播放"/>
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1dip"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:background="@color/colorDividerGray"></View>-->
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/local_recycler_view"

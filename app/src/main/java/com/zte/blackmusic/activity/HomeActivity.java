@@ -275,7 +275,7 @@ public class HomeActivity extends PlayBarBaseActivity {
         }
         isStartTheme = false;
     }
-
+    //手机回退键回退到桌面功能
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){

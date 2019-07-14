@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:gravity="bottom"
-                    android:text="没事的时候"
+                    android:text="MyMusic"
                     android:textColor="#999999"
                     android:textSize="16sp" />
 
