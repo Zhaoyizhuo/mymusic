@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zte.blackmusic.activity.WelcomeActivity">
+    tools:context="com.music.blackmusic.activity.WelcomeActivity">
 
     <LinearLayout
         android:id="@+id/welcome_content_ll"
