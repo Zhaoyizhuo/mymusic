@@ -18,7 +18,6 @@ public class AboutActivity extends BaseActivity{
 
     private Toolbar toolbar;
     private TextView versionTv;
-    private LinearLayout startLl;
     private LinearLayout scoreLl;
 
     @Override

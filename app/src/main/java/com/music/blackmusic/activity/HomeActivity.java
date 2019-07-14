@@ -1,5 +1,4 @@
 package com.music.blackmusic.activity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,20 +20,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.music.blackmusic.R;
 import com.music.blackmusic.adapter.HomeListViewAdapter;
 import com.music.blackmusic.database.DBManager;
 import com.music.blackmusic.entity.PlayListInfo;
 import com.music.blackmusic.service.MusicPlayerService;
 import com.music.blackmusic.util.Constant;
-import com.music.blackmusic.util.MyApplication;
 import com.music.blackmusic.util.MyMusicUtil;
-
-import java.io.IOException;
 import java.util.List;
-
 public class HomeActivity extends PlayBarBaseActivity {
     private static final String TAG = HomeActivity.class.getName();
     private DBManager dbManager;
