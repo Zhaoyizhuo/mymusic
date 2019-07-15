@@ -5,7 +5,6 @@
     <color name="common_bg">#2c2c2c</color>
     <!--夜间模式下 触摸背景色-->
     <color name="common_touch_bg">#3b3b3b</color>
-
     <color name="layout_day_normal">#FFFFFF</color>
     <color name="layout_day_press">#ffeeeeee</color>
     <color name="layout_night_normal">#2c2c2c</color>

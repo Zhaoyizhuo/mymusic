@@ -6,7 +6,7 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorPlayBarGray">#F0F4F3</color>
-    <color name="colorLightGrayHalfAlpha">#30D3D3D3</color>
+    <color name="colorLightGcommon_touch_bgrayHalfAlpha">#30D3D3D3</color>
     <color name="colorLightGray">#D3D3D3</color>
     <color name="colorDarkBackground">#404040</color>
     <color name="colorDividerGray">#50CACACA</color>
@@ -26,14 +26,11 @@
     <color name="common_bg">#FFFFFF</color>
     <!--日间模式下 触摸背景色-->
     <color name="common_touch_bg">#ffeeeeee</color>
-
     <color name="layout_day_normal">#FFFFFF</color>
     <color name="layout_day_press">#ffeeeeee</color>
     <color name="layout_night_normal">#2c2c2c</color>
     <color name="layout_night_press">#3b3b3b</color>
-
     <!--主题颜色-->
-
     <!--早苗绿-->
     <color name="ZaoMiaoGreen">#4BAF4F</color>
     <color name="ZaoMiaoGreen50">#B04BAF4F</color>

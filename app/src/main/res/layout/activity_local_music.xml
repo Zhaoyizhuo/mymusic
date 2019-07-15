@@ -12,20 +12,6 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <TextView
-        android:id="@+id/local_nothing_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:clickable="true"
-        android:textColor="?attr/appbg"
-        android:textSize="18sp"
-        android:maxLines="2"
-        android:text="暂时没有歌曲哦，点击我可以扫描本地歌曲!!!"
-        android:visibility="gone"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/local_tab"

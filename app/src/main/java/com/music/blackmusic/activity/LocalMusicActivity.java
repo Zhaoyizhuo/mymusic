@@ -64,8 +64,6 @@ public class LocalMusicActivity extends PlayBarBaseActivity {
         super.onResume();
         Log.d(TAG, "onResume: " );
     }
-
-
     private void init(){
         //加载滑动布局
         addTapData();
@@ -77,20 +75,7 @@ public class LocalMusicActivity extends PlayBarBaseActivity {
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setupWithViewPager(viewPager);
-
-        nothingTv = (TextView)findViewById(R.id.local_nothing_tv);
-        nothingTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            //点击进入扫描界面
-            public void onClick(View v) {
-                Intent intent = new Intent(LocalMusicActivity.this,ScanActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
-
-
     //滑动布局
     private void addTapData() {
         titleList.add("单曲");
